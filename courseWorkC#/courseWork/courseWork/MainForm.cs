@@ -59,7 +59,7 @@ namespace courseWork
         {
             var rep = new InsuranceRepository();
             var result = rep.GetList(_currentInsurancesSort);
-            
+            insuranceBuyButton.Enabled = result.Count() > 0;
             insurancesDataGridView.DataSource = result;
         }
 
