@@ -1,6 +1,5 @@
 using CourseWorkDB.Repositories;
-using Microsoft.Data.SqlClient;
-using System.Data;
+using CourseWorkDB.Utilities;
 
 namespace courseWork
 {
@@ -19,7 +18,7 @@ namespace courseWork
         private void LoginButton_Click(object sender, EventArgs e)
         {
             var rep = new UserRepository();
-            var user = rep.GetByCredentials(loginTextBox.Text, passwordTextBox.Text);
+            var user = rep.GetByCredentials(loginTextBox.Text, PasswordHashService.GetHash(passwordTextBox.Text));
             if (user != null)
             {
                 if (user.RoleId != 1)

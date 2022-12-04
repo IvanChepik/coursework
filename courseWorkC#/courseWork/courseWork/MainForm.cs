@@ -37,7 +37,7 @@ namespace courseWork
 
             if (isUserHas)
             {
-                MessageBox.Show("Пользователь уже имеет эту страховку", "Ошибка");
+                MessageBox.Show("Пользователь уже имеет эту страховку","Ошибка");
             }
             else
             {

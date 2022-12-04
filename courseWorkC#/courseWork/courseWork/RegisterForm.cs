@@ -1,5 +1,6 @@
 ﻿using CourseWorkDB.Models;
 using CourseWorkDB.Repositories;
+using CourseWorkDB.Utilities;
 
 namespace courseWork
 {
@@ -32,7 +33,7 @@ namespace courseWork
             }
             else
             {
-                rep.Create(new UserModel(loginTextBox.Text, passwordTextBox.Text));
+                rep.Create(new UserModel(loginTextBox.Text, PasswordHashService.GetHash(passwordTextBox.Text)));
                 var authForm = new AuthForm();
                 authForm.Show();
                 Close();

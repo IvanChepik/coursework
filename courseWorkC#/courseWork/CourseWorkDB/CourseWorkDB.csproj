@@ -192,6 +192,7 @@
     <Compile Include="Repositories\UsersInsurancesRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Utilities\DataBaseInitService.cs" />
+    <Compile Include="Utilities\PasswordHashService.cs" />
     <Compile Include="Utilities\SortModel.cs" />
   </ItemGroup>
   <ItemGroup />

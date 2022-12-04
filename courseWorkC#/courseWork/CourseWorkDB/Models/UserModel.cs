@@ -7,7 +7,7 @@ namespace CourseWorkDB.Models
         [DisplayName("Логин")]
         public string UserName { get; set; }
 
-        [DisplayName("Пароль")]
+        [Browsable(false)]
         public string Password { get; set; }
 
         [Browsable(false)]

@@ -34,6 +34,8 @@ namespace CourseWorkDB.Utilities
                 {
                     using (var cmd = connection.CreateCommand())
                     {
+                        var hashAdminPass = PasswordHashService.GetHash("admin");
+
                         connection.Open();
                         cmd.Connection = connection;
 
@@ -85,7 +87,7 @@ namespace CourseWorkDB.Utilities
 
                         cmd.CommandText += "INSERT INTO users VALUES (@username, @password, @role_id_user);";
                         cmd.Parameters.Add("@username", SqlDbType.NVarChar).Value = "admin";
-                        cmd.Parameters.Add("@password", SqlDbType.NVarChar).Value = "admin";
+                        cmd.Parameters.Add("@password", SqlDbType.NVarChar).Value = hashAdminPass;
                         cmd.Parameters.Add("@role_id_user", SqlDbType.Int).Value = 1;
 
                         cmd.CommandText += "INSERT INTO insurance_types VALUES (@insurance_type_name);";
