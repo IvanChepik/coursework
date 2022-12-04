@@ -78,6 +78,7 @@
             this.insurancesDataGridView.RowTemplate.Height = 25;
             this.insurancesDataGridView.Size = new System.Drawing.Size(509, 514);
             this.insurancesDataGridView.TabIndex = 2;
+            this.insurancesDataGridView.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.insurancesDataGridView_ColumnHeaderMouseClick);
             // 
             // userInsuranceGroupBox
             // 
@@ -111,9 +112,9 @@
             this.userInsurancesDataGridView.Name = "userInsurancesDataGridView";
             this.userInsurancesDataGridView.RowHeadersWidth = 51;
             this.userInsurancesDataGridView.RowTemplate.Height = 25;
-            this.userInsurancesDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.userInsurancesDataGridView.Size = new System.Drawing.Size(498, 514);
             this.userInsurancesDataGridView.TabIndex = 2;
+            this.userInsurancesDataGridView.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.userInsurancesDataGridView_ColumnHeaderMouseClick);
             // 
             // userLabel
             // 

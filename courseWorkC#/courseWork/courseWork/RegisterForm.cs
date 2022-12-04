@@ -9,6 +9,10 @@ namespace courseWork
         {
             InitializeComponent();
             errorLabel.Text = string.Empty;
+            loginTextBox.TextChanged += CheckWrongFields;
+            passwordTextBox.TextChanged += CheckWrongFields;
+            repeatPasswordTextBox.TextChanged += CheckWrongFields;
+            CheckWrongFields();
         }
 
         private void backButton_Click(object sender, EventArgs e)
@@ -39,5 +43,11 @@ namespace courseWork
         {
             errorLabel.Text = string.Empty;
         }
+
+        private void CheckWrongFields(object? sender = null, EventArgs? e = null)
+        {
+            registrationButton.Enabled = !(loginLabel.Text == string.Empty || passwordTextBox.Text == string.Empty || passwordTextBox.Text != repeatPasswordTextBox.Text);
+        }
+
     }
 }

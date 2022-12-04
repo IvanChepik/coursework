@@ -182,10 +182,13 @@
     <Compile Include="BaseRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Models\InsuranceModel.cs" />
+    <Compile Include="Models\InsuranceType.cs" />
+    <Compile Include="Models\UserInsuranceModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UsersInsurancesModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\InsuranceRepository.cs" />
+    <Compile Include="Repositories\InsuranceTypesRepository.cs" />
     <Compile Include="Repositories\UsersInsurancesRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Utilities\DataBaseInitService.cs" />

@@ -1,21 +1,22 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace CourseWorkDB.Models
 {
     public class UserModel
     {
-        [DisplayName("Имя")]
+        [DisplayName("Логин")]
         public string UserName { get; set; }
 
         [DisplayName("Пароль")]
         public string Password { get; set; }
 
         [Browsable(false)]
-        public bool IsAdmin { get; set; }
+        public int RoleId { get; set; }
 
-        [DisplayName("Количество страховок")]
-        public int InsuranceCount { get; set; }
+        [DisplayName("Роль")]
+        public string RoleName { get; set; }
+
+
 
         public UserModel()
         {
@@ -27,11 +28,5 @@ namespace CourseWorkDB.Models
             Password = password;
         }
 
-        public UserModel(string userName, string password, int insuranceCount)
-        {
-            UserName = userName;
-            Password = password;
-            InsuranceCount = insuranceCount;
-        }
     }
 }

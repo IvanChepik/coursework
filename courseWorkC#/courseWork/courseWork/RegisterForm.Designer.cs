@@ -52,9 +52,9 @@
             this.loginLabel.AutoSize = true;
             this.loginLabel.Location = new System.Drawing.Point(112, 71);
             this.loginLabel.Name = "loginLabel";
-            this.loginLabel.Size = new System.Drawing.Size(31, 15);
+            this.loginLabel.Size = new System.Drawing.Size(41, 15);
             this.loginLabel.TabIndex = 3;
-            this.loginLabel.Text = "Имя";
+            this.loginLabel.Text = "Логин";
             // 
             // passwordLabel
             // 

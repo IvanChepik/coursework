@@ -6,11 +6,13 @@ namespace courseWork
     public partial class InsuranceAddForm : Form
     {
 
+        private IEnumerable<InsuranceType> insuranceTypes;
         InsuranceModel? editedInsurance {get; set;}
 
         public InsuranceAddForm(InsuranceModel? insurance = null)
         {
             InitializeComponent();
+            LoadInsuranceTypes();
             editedInsurance = insurance;  
             Text = insurance == null ? "Создание страховки" : "Редактирование страховки";
             addButton.Text = insurance == null ? "Создать" : "Редактировать";
@@ -26,11 +28,11 @@ namespace courseWork
             var rep = new InsuranceRepository();
             if (editedInsurance != null)
             {
-                rep.Update(new InsuranceModel(editedInsurance.IncuranceId, nameTextBox.Text, Decimal.Parse(priceTextBox.Text)));
+                rep.Update(new InsuranceModel(editedInsurance.IncuranceId, nameTextBox.Text, (int)typeComboBox.SelectedValue, Decimal.Parse(priceTextBox.Text)));
             }
             else
             {
-                rep.Create(new InsuranceModel(nameTextBox.Text, Convert.ToDecimal(priceTextBox.Text)));
+                rep.Create(new InsuranceModel(nameTextBox.Text,Convert.ToDecimal(priceTextBox.Text), (int)typeComboBox.SelectedValue));
             }
         }
 
@@ -44,6 +46,15 @@ namespace courseWork
             {
                 e.Handled = true;
             }
+        }
+
+        private void LoadInsuranceTypes()
+        {
+            var rep = new InsuranceTypesRepository();
+            insuranceTypes = rep.GetList();
+            typeComboBox.DataSource = insuranceTypes;
+            typeComboBox.DisplayMember = "Name";
+            typeComboBox.ValueMember = "Id";
         }
     }
 }

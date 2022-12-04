@@ -22,7 +22,7 @@ namespace courseWork
             var user = rep.GetByCredentials(loginTextBox.Text, passwordTextBox.Text);
             if (user != null)
             {
-                if (!user.IsAdmin)
+                if (user.RoleId != 1)
                 {
                     var mainForm = new MainForm(user);
                     mainForm.Show();

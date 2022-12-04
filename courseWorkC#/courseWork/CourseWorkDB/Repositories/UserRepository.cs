@@ -17,7 +17,7 @@ namespace CourseWorkDB.Repositories
             this.connectionString = connectionString;
         }
 
-        public override void Create(UserModel item)
+        public void Create(UserModel item)
         {
             using (var connection = new SqlConnection(connectionString))
             {
@@ -25,23 +25,13 @@ namespace CourseWorkDB.Repositories
                 {
                     connection.Open();
                     cmd.Connection = connection;
-                    cmd.CommandText = "INSERT INTO users VALUES (@username, @password, @is_admin);";
+                    cmd.CommandText = "INSERT INTO users VALUES (@username, @password, @role_id);";
                     cmd.Parameters.Add("@username", SqlDbType.NVarChar).Value = item.UserName;
                     cmd.Parameters.Add("@password", SqlDbType.NVarChar).Value = item.Password;
-                    cmd.Parameters.Add("@is_admin", SqlDbType.Bit).Value = 0;
+                    cmd.Parameters.Add("@role_id", SqlDbType.Int).Value = 2;
                     cmd.ExecuteNonQuery();
                 }
             }
-        }
-
-        public override void Delete(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override UserModel Get(int id)
-        {
-            throw new System.NotImplementedException();
         }
 
         public UserModel GetByCredentials(string username, string password)
@@ -62,7 +52,7 @@ namespace CourseWorkDB.Repositories
                             var userModel = new UserModel();
                             userModel.UserName = reader[0].ToString();
                             userModel.Password = reader[1].ToString();
-                            userModel.IsAdmin = Convert.ToBoolean(reader[2]);
+                            userModel.RoleId = (int)reader[2];
                             return userModel;
                         }
                     }
@@ -89,7 +79,7 @@ namespace CourseWorkDB.Repositories
                             var userModel = new UserModel();
                             userModel.UserName = reader[0].ToString();
                             userModel.Password = reader[1].ToString();
-                            userModel.IsAdmin = Convert.ToBoolean(reader[2]);
+                            userModel.RoleId = (int)reader[2];
                             return userModel;
                         }
                     }
@@ -100,7 +90,7 @@ namespace CourseWorkDB.Repositories
         }
 
 
-        public override IEnumerable<UserModel> GetList(SortModel sort = null)
+        public IEnumerable<UserModel> GetList(SortModel sort = null)
         {
             var userList = new List<UserModel>();
             using (var connection = new SqlConnection(connectionString))
@@ -109,12 +99,7 @@ namespace CourseWorkDB.Repositories
                 {
                     connection.Open();
                     cmd.Connection = connection;
-                    cmd.CommandText = "SELECT u.username, u.password, u.is_admin " +
-                        "FROM users as u " +
-                        "LEFT JOIN users_insurances as ui " +
-                            "ON ui.username = u.username " +
-                        "WHERE u.is_admin = 0 " +
-                        "GROUP BY u.username, u.password, u.is_admin";
+                    cmd.CommandText = "SELECT * FROM users_not_admin";
                     if (sort != null)
                     {
                         cmd.CommandText += $" ORDER BY {sort.Field} {sort.Order}";
@@ -127,8 +112,8 @@ namespace CourseWorkDB.Repositories
                             var userModel = new UserModel();
                             userModel.UserName = reader[0].ToString();
                             userModel.Password = reader[1].ToString();
-                            userModel.IsAdmin = Convert.ToBoolean(reader[2]);
-                            userModel.InsuranceCount = reader.FieldCount < 4? 0: (int)reader[3];
+                            userModel.RoleId = (int)reader[2];
+                            userModel.RoleName = reader[3].ToString(); 
                             userList.Add(userModel);
                         }
                     }
@@ -138,14 +123,5 @@ namespace CourseWorkDB.Repositories
             return userList;
         }
 
-        public override void Save()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void Update(UserModel item)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

@@ -21,7 +21,12 @@ namespace courseWork
         public void LoadInsurances()
         {
             var rep = new InsuranceRepository();
-            insurancesDataGridView.DataSource = rep.GetList(_currentInsurancesSort);
+            var result = rep.GetList(_currentInsurancesSort);
+
+            insuranceEditButton.Enabled = result.Count() > 0;
+            deleteInsuranceButton.Enabled = result.Count() > 0;
+
+            insurancesDataGridView.DataSource = result;
         }
 
         private void LoadUsers()
@@ -89,6 +94,9 @@ namespace courseWork
                     break;
                 case 1:
                     _currentInsurancesSort = SortService.GetNewSort(_currentInsurancesSort, "price");
+                    break;
+                case 2:
+                    _currentInsurancesSort = SortService.GetNewSort(_currentInsurancesSort, "type");
                     break;
             }
             LoadInsurances();
